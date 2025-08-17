@@ -1,6 +1,6 @@
 ESX = exports["es_extended"]:getSharedObject()
 
--- Event to get player's licenses
+
 RegisterNetEvent('koki_characterinfo:getLicenses')
 AddEventHandler('koki_characterinfo:getLicenses', function()
     local source = source
@@ -16,4 +16,5 @@ AddEventHandler('koki_characterinfo:getLicenses', function()
         end
         TriggerClientEvent('koki_info:receiveLicenses', source, licenseData)
     end)
+
 end)
