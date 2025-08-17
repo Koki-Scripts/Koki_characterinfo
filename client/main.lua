@@ -6,27 +6,22 @@ local personalInvoices = {}
 local companyInvoices = {}
 local hasJob = false
 
--- Command to open the menu
 RegisterCommand('osoba', function()
     OpenCharacterMenu()
 end)
 
--- Key binding for F4
 RegisterKeyMapping('osoba', 'Otevřít menu osoby', 'keyboard', 'F4')
 
--- Event to receive vehicle data
 RegisterNetEvent('koki_characterinfo:receiveVehicles')
 AddEventHandler('koki_characterinfo:receiveVehicles', function(vehicles)
     vehicleData = vehicles
 end)
 
--- Event to receive license data
 RegisterNetEvent('koki_characterinfo:receiveLicenses')
 AddEventHandler('koki_characterinfo:receiveLicenses', function(licenses)
     licenseData = licenses
 end)
 
--- Event to receive invoice data
 RegisterNetEvent('koki_characterinfo:receiveInvoices')
 AddEventHandler('koki_characterinfo:receiveInvoices', function(personal, company, hasJobStatus)
     personalInvoices = personal
@@ -34,7 +29,6 @@ AddEventHandler('koki_characterinfo:receiveInvoices', function(personal, company
     hasJob = hasJobStatus
 end)
 
--- Function to get color name from color ID
 local function GetColorName(colorId)
     local colors = {
         [0] = "Černá",
@@ -54,7 +48,6 @@ local function GetColorName(colorId)
     return colors[colorId] or "Neznámá"
 end
 
--- Function to get license status emoji
 local function GetLicenseStatus(type)
     if licenseData[type] then
         return '🟢'
@@ -63,15 +56,13 @@ local function GetLicenseStatus(type)
     end
 end
 
--- Function to format invoice date
 local function FormatDate(timestamp)
     local date = os.date('%d.%m.%Y %H:%M', timestamp)
     return date
 end
 
--- Function to open the character menu
 function OpenCharacterMenu()
-    -- Request vehicle and license data
+    
     TriggerServerEvent('koki_characterinfo:getVehicles')
     TriggerServerEvent('koki_characterinfo:getLicenses')
     TriggerServerEvent('koki_characterinfo:getInvoices')
@@ -233,4 +224,5 @@ function OpenCharacterMenu()
     })
     
     lib.showContext('main_menu')
+
 end 
